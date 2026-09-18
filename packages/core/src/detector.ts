@@ -95,7 +95,7 @@ export class TargetDetector {
     return {
       type: typeMap[protocol] || "unknown",
       confidence: 0.95,
-      adapter: `database-${protocol}`,
+      adapter: "database",
       metadata: { protocol },
     };
   }
@@ -145,6 +145,15 @@ export class TargetDetector {
             type: "grpc",
             confidence: 0.95,
             adapter: "grpc",
+            metadata: { file: filePath, ext },
+          });
+        }
+
+        if (ext === "db" || ext === "sqlite" || ext === "sqlite3") {
+          results.push({
+            type: "database-sqlite",
+            confidence: 0.98,
+            adapter: "database",
             metadata: { file: filePath, ext },
           });
         }

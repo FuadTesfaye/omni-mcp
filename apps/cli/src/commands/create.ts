@@ -4,6 +4,8 @@ import { McpifyPipeline, AdapterRegistry } from "@omni-mcp/core";
 import { OpenApiAdapter } from "@omni-mcp/adapter-openapi";
 import { CliAdapter } from "@omni-mcp/adapter-cli";
 import { PostmanAdapter } from "@omni-mcp/adapter-postman";
+import { DatabaseAdapter } from "@omni-mcp/adapter-database";
+import { VerificationEngine } from "@omni-mcp/verification";
 import { MCPGateway, connectStdio, startHttpTransport } from "@omni-mcp/mcp";
 
 export async function createCommand(
@@ -25,6 +27,7 @@ export async function createCommand(
     );
     console.log(chalk.gray("  Example: mcpify ./my-api.json"));
     console.log(chalk.gray("  Example: mcpify ./my-collection.postman_collection.json"));
+    console.log(chalk.gray("  Example: mcpify postgres://localhost/mydb"));
     console.log(chalk.gray("  Example: mcpify git"));
     process.exit(1);
   }
@@ -36,6 +39,7 @@ export async function createCommand(
   registry.register(new OpenApiAdapter());
   registry.register(new CliAdapter());
   registry.register(new PostmanAdapter());
+  registry.register(new DatabaseAdapter());
 
   const pipeline = new McpifyPipeline(registry);
 
@@ -86,7 +90,29 @@ export async function createCommand(
         chalk.red(`    ${result.stats.destructiveTools} destructive`)
       );
     }
-    // Step 4: Write manifest if output directory specified
+    console.log();
+
+    // Step 4: Verification
+    const verifier = new VerificationEngine();
+    const verification = verifier.verifyAll(result.tools);
+
+    console.log(chalk.bold("  Verification:"));
+    console.log(
+      chalk.green(`    ${verification.verifiedCount} capabilities verified`)
+    );
+    if (verification.warningCount > 0) {
+      console.log(
+        chalk.yellow(`    ${verification.warningCount} quality notices`)
+      );
+    }
+    if (verification.failureCount > 0) {
+      console.log(
+        chalk.red(`    ${verification.failureCount} failed checks`)
+      );
+    }
+    console.log();
+
+    // Step 5: Write manifest if output directory specified
     if (options.output) {
       const fs = await import("fs/promises");
       const path = await import("path");

@@ -4,6 +4,7 @@ import { McpifyPipeline, AdapterRegistry } from "@omni-mcp/core";
 import { OpenApiAdapter } from "@omni-mcp/adapter-openapi";
 import { CliAdapter } from "@omni-mcp/adapter-cli";
 import { PostmanAdapter } from "@omni-mcp/adapter-postman";
+import { DatabaseAdapter } from "@omni-mcp/adapter-database";
 import type { IntermediateToolDefinition } from "@omni-mcp/types";
 
 export async function serveCommand(options: {
@@ -61,6 +62,7 @@ export async function serveCommand(options: {
   registry.register(new OpenApiAdapter());
   registry.register(new CliAdapter());
   registry.register(new PostmanAdapter());
+  registry.register(new DatabaseAdapter());
   const pipeline = new McpifyPipeline(registry);
 
   const serverName = manifest.name || "omni-mcp-server";

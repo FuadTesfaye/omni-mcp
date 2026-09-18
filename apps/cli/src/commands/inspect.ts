@@ -4,6 +4,8 @@ import { McpifyPipeline, AdapterRegistry } from "@omni-mcp/core";
 import { OpenApiAdapter } from "@omni-mcp/adapter-openapi";
 import { CliAdapter } from "@omni-mcp/adapter-cli";
 import { PostmanAdapter } from "@omni-mcp/adapter-postman";
+import { DatabaseAdapter } from "@omni-mcp/adapter-database";
+import { VerificationEngine } from "@omni-mcp/verification";
 
 export async function inspectCommand(
   source: string,
@@ -15,6 +17,7 @@ export async function inspectCommand(
   registry.register(new OpenApiAdapter());
   registry.register(new CliAdapter());
   registry.register(new PostmanAdapter());
+  registry.register(new DatabaseAdapter());
   const pipeline = new McpifyPipeline(registry);
 
   const spinner = ora("Inspecting...").start();
@@ -46,6 +49,19 @@ export async function inspectCommand(
       console.log(
         `    ${riskColor("\u25CF")} ${chalk.white(tool.name)} ${chalk.gray(`\u2014 ${tool.description.slice(0, 60)}`)}`
       );
+    }
+
+    // Verification report
+    const verifier = new VerificationEngine();
+    const verification = verifier.verifyAll(result.tools);
+
+    console.log(chalk.bold("  Verification:"));
+    console.log(chalk.green(`    ${verification.verifiedCount} capabilities verified`));
+    if (verification.warningCount > 0) {
+      console.log(chalk.yellow(`    ${verification.warningCount} quality notices`));
+    }
+    if (verification.failureCount > 0) {
+      console.log(chalk.red(`    ${verification.failureCount} failed checks`));
     }
 
     console.log(chalk.gray(`\n  Warnings:`));

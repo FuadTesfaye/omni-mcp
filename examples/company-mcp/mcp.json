@@ -1,0 +1,300 @@
+{
+  "name": "departments",
+  "version": "0.1.0",
+  "source": "./examples/company.db",
+  "sourceType": "database-sqlite",
+  "stats": {
+    "discovered": 2,
+    "generated": 5,
+    "readTools": 5,
+    "mutationTools": 0,
+    "destructiveTools": 0,
+    "groups": [
+      "departments",
+      "employees"
+    ]
+  },
+  "tools": [
+    {
+      "id": "b7a3cdc0-fbed-4794-817c-a6cccc9232c3",
+      "name": "get_departments",
+      "title": "Get departments",
+      "description": "Retrieve a single record from departments by primary key (id)",
+      "source": {
+        "type": "database",
+        "identifier": "./examples/company.db",
+        "originalName": "departments"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Primary key: id for table departments"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "execution": {
+        "type": "sql",
+        "config": {
+          "operation": "get",
+          "table": "departments",
+          "primaryKeys": [
+            "id"
+          ]
+        }
+      },
+      "risk": {
+        "level": "low",
+        "actions": [
+          "read",
+          ""
+        ]
+      },
+      "metadata": {
+        "tags": [
+          "database",
+          "departments"
+        ],
+        "confidence": 0.98,
+        "generated": true,
+        "group": "departments"
+      }
+    },
+    {
+      "id": "4acdda96-7660-421f-8742-d16f5637c227",
+      "name": "search_departments",
+      "title": "Search departments",
+      "description": "Search and filter records in departments with pagination",
+      "source": {
+        "type": "database",
+        "identifier": "./examples/company.db",
+        "originalName": "departments"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of records to return (default: 20, max: 100)",
+            "default": 20
+          },
+          "offset": {
+            "type": "number",
+            "description": "Number of records to skip for pagination (default: 0)",
+            "default": 0
+          },
+          "id": {
+            "type": "number",
+            "description": "Filter by id (INTEGER)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Filter by name (TEXT)"
+          },
+          "budget": {
+            "type": "number",
+            "description": "Filter by budget (REAL)"
+          }
+        }
+      },
+      "execution": {
+        "type": "sql",
+        "config": {
+          "operation": "search",
+          "table": "departments",
+          "maxLimit": 100
+        }
+      },
+      "risk": {
+        "level": "low",
+        "actions": [
+          "read",
+          ""
+        ]
+      },
+      "metadata": {
+        "tags": [
+          "database",
+          "departments"
+        ],
+        "confidence": 0.98,
+        "generated": true,
+        "group": "departments"
+      }
+    },
+    {
+      "id": "b3b2df96-b54b-4610-ac37-4a0474206940",
+      "name": "get_employees",
+      "title": "Get employees",
+      "description": "Retrieve a single record from employees by primary key (id)",
+      "source": {
+        "type": "database",
+        "identifier": "./examples/company.db",
+        "originalName": "employees"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "Primary key: id for table employees"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "execution": {
+        "type": "sql",
+        "config": {
+          "operation": "get",
+          "table": "employees",
+          "primaryKeys": [
+            "id"
+          ]
+        }
+      },
+      "risk": {
+        "level": "low",
+        "actions": [
+          "read",
+          ""
+        ]
+      },
+      "metadata": {
+        "tags": [
+          "database",
+          "employees"
+        ],
+        "confidence": 0.98,
+        "generated": true,
+        "group": "employees"
+      }
+    },
+    {
+      "id": "dd9a8ade-f2b5-43af-a9b5-3654885c7f61",
+      "name": "search_employees",
+      "title": "Search employees",
+      "description": "Search and filter records in employees with pagination",
+      "source": {
+        "type": "database",
+        "identifier": "./examples/company.db",
+        "originalName": "employees"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of records to return (default: 20, max: 100)",
+            "default": 20
+          },
+          "offset": {
+            "type": "number",
+            "description": "Number of records to skip for pagination (default: 0)",
+            "default": 0
+          },
+          "id": {
+            "type": "number",
+            "description": "Filter by id (INTEGER)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Filter by name (TEXT)"
+          },
+          "department_id": {
+            "type": "number",
+            "description": "Filter by department_id (INTEGER)"
+          },
+          "role": {
+            "type": "string",
+            "description": "Filter by role (TEXT)"
+          },
+          "salary": {
+            "type": "number",
+            "description": "Filter by salary (REAL)"
+          }
+        }
+      },
+      "execution": {
+        "type": "sql",
+        "config": {
+          "operation": "search",
+          "table": "employees",
+          "maxLimit": 100
+        }
+      },
+      "risk": {
+        "level": "low",
+        "actions": [
+          "read",
+          ""
+        ]
+      },
+      "metadata": {
+        "tags": [
+          "database",
+          "employees"
+        ],
+        "confidence": 0.98,
+        "generated": true,
+        "group": "employees"
+      }
+    },
+    {
+      "id": "011c541a-43fe-45e8-b5c5-2e799310a0ad",
+      "name": "get_departments_employees",
+      "title": "Get employees for departments",
+      "description": "Retrieve all employees associated with departments via foreign key department_id",
+      "source": {
+        "type": "database",
+        "identifier": "./examples/company.db",
+        "originalName": "departments->employees"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Target key id in table departments"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "execution": {
+        "type": "sql",
+        "config": {
+          "operation": "relationship",
+          "sourceTable": "employees",
+          "sourceColumn": "department_id",
+          "targetTable": "departments",
+          "targetColumn": "id"
+        }
+      },
+      "risk": {
+        "level": "low",
+        "actions": [
+          "read",
+          ""
+        ]
+      },
+      "metadata": {
+        "tags": [
+          "database",
+          "departments",
+          "employees"
+        ],
+        "confidence": 0.95,
+        "generated": true,
+        "group": "departments"
+      }
+    }
+  ],
+  "generatedAt": "2026-09-18T19:43:28.642Z"
+}

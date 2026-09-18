@@ -17,10 +17,12 @@
       },
       "dependencies": {
         "@omni-mcp/adapter-cli": "workspace:*",
+        "@omni-mcp/adapter-database": "workspace:*",
         "@omni-mcp/adapter-openapi": "workspace:*",
         "@omni-mcp/adapter-postman": "workspace:*",
         "@omni-mcp/core": "workspace:*",
         "@omni-mcp/mcp": "workspace:*",
+        "@omni-mcp/verification": "workspace:*",
         "chalk": "^5.4.1",
         "commander": "^13.0.0",
         "ora": "^8.1.1",
@@ -56,6 +58,19 @@
     },
     "packages/adapter-cli": {
       "name": "@omni-mcp/adapter-cli",
+      "version": "0.1.0",
+      "dependencies": {
+        "@omni-mcp/types": "workspace:*",
+      },
+      "devDependencies": {
+        "@omni-mcp/typescript-config": "workspace:*",
+        "@types/bun": "latest",
+        "@types/node": "^22.0.0",
+        "typescript": "^5.7.0",
+      },
+    },
+    "packages/adapter-database": {
+      "name": "@omni-mcp/adapter-database",
       "version": "0.1.0",
       "dependencies": {
         "@omni-mcp/types": "workspace:*",
@@ -138,6 +153,19 @@
     "packages/typescript-config": {
       "name": "@omni-mcp/typescript-config",
       "version": "0.1.0",
+    },
+    "packages/verification": {
+      "name": "@omni-mcp/verification",
+      "version": "0.1.0",
+      "dependencies": {
+        "@omni-mcp/types": "workspace:*",
+      },
+      "devDependencies": {
+        "@omni-mcp/typescript-config": "workspace:*",
+        "@types/bun": "latest",
+        "@types/node": "^22.0.0",
+        "typescript": "^5.7.0",
+      },
     },
   },
   "packages": {
@@ -287,6 +315,8 @@
 
     "@omni-mcp/adapter-cli": ["@omni-mcp/adapter-cli@workspace:packages/adapter-cli"],
 
+    "@omni-mcp/adapter-database": ["@omni-mcp/adapter-database@workspace:packages/adapter-database"],
+
     "@omni-mcp/adapter-openapi": ["@omni-mcp/adapter-openapi@workspace:packages/adapter-openapi"],
 
     "@omni-mcp/adapter-postman": ["@omni-mcp/adapter-postman@workspace:packages/adapter-postman"],
@@ -302,6 +332,8 @@
     "@omni-mcp/types": ["@omni-mcp/types@workspace:packages/types"],
 
     "@omni-mcp/typescript-config": ["@omni-mcp/typescript-config@workspace:packages/typescript-config"],
+
+    "@omni-mcp/verification": ["@omni-mcp/verification@workspace:packages/verification"],
 
     "@omni-mcp/web": ["@omni-mcp/web@workspace:apps/web"],
 
