@@ -29,7 +29,7 @@ export default function HomePage() {
             Get Started
           </Link>
           <Link
-            href="https://github.com/fuayd/omni-mcp"
+            href="https://github.com/FuadTesfaye/omni-mcp"
             className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-medium hover:bg-accent transition-colors"
           >
             GitHub →

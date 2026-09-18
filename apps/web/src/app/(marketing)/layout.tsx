@@ -22,7 +22,7 @@ export default function MarketingLayout({
               Docs
             </Link>
             <Link
-              href="https://github.com/fuayd/omni-mcp"
+              href="https://github.com/FuadTesfaye/omni-mcp"
               className="text-muted-foreground hover:text-foreground transition-colors"
               target="_blank"
             >
