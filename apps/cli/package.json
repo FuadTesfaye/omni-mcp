@@ -1,0 +1,28 @@
+{
+  "name": "@omni-mcp/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "mcpify": "./src/index.ts"
+  },
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@omni-mcp/core": "workspace:*",
+    "@omni-mcp/adapter-openapi": "workspace:*",
+    "@omni-mcp/mcp": "workspace:*",
+    "commander": "^13.0.0",
+    "chalk": "^5.4.1",
+    "ora": "^8.1.1"
+  },
+  "devDependencies": {
+    "@omni-mcp/typescript-config": "workspace:*",
+    "@types/bun": "latest",
+    "typescript": "^5.7.0"
+  }
+}
