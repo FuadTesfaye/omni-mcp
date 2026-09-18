@@ -2,6 +2,8 @@ import ora from "ora";
 import chalk from "chalk";
 import { McpifyPipeline, AdapterRegistry } from "@omni-mcp/core";
 import { OpenApiAdapter } from "@omni-mcp/adapter-openapi";
+import { CliAdapter } from "@omni-mcp/adapter-cli";
+import { PostmanAdapter } from "@omni-mcp/adapter-postman";
 import { MCPGateway, connectStdio, startHttpTransport } from "@omni-mcp/mcp";
 
 export async function createCommand(
@@ -22,6 +24,8 @@ export async function createCommand(
       )
     );
     console.log(chalk.gray("  Example: mcpify ./my-api.json"));
+    console.log(chalk.gray("  Example: mcpify ./my-collection.postman_collection.json"));
+    console.log(chalk.gray("  Example: mcpify git"));
     process.exit(1);
   }
 
@@ -30,6 +34,8 @@ export async function createCommand(
   // Step 1: Setup
   const registry = new AdapterRegistry();
   registry.register(new OpenApiAdapter());
+  registry.register(new CliAdapter());
+  registry.register(new PostmanAdapter());
 
   const pipeline = new McpifyPipeline(registry);
 
@@ -80,9 +86,27 @@ export async function createCommand(
         chalk.red(`    ${result.stats.destructiveTools} destructive`)
       );
     }
-    console.log();
+    // Step 4: Write manifest if output directory specified
+    if (options.output) {
+      const fs = await import("fs/promises");
+      const path = await import("path");
+      const outDir = options.output;
+      await fs.mkdir(outDir, { recursive: true });
+      const manifestPath = path.join(outDir, "mcp.json");
+      const manifest = {
+        name: result.tools[0]?.metadata.group || "omni-mcp-server",
+        version: "0.1.0",
+        source: result.source,
+        sourceType: result.sourceType,
+        stats: result.stats,
+        tools: result.tools,
+        generatedAt: new Date().toISOString(),
+      };
+      await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
+      console.log(chalk.green(`  Manifest generated at: ${manifestPath}\n`));
+    }
 
-    // Step 4: Serve if requested
+    // Step 5: Serve if requested
     if (options.serve) {
       const gateway = new MCPGateway(
         "omni-mcp",

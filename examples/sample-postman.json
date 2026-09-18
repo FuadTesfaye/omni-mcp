@@ -1,0 +1,57 @@
+{
+  "info": {
+    "name": "E-Commerce Services API",
+    "description": "Postman collection sample for Omni-MCP verification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://api.store.local/v1/products?category=electronics&limit=10",
+              "path": ["v1", "products"],
+              "query": [
+                { "key": "category", "value": "electronics", "description": "Product category" },
+                { "key": "limit", "value": "10", "description": "Page limit" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "url": "https://api.store.local/v1/products",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Wireless Headphones\",\n  \"price\": 99.99,\n  \"sku\": \"WH-100\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Checkout",
+      "item": [
+        {
+          "name": "Delete Cart",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "https://api.store.local/v1/cart/:cartId",
+              "path": ["v1", "cart", ":cartId"],
+              "variable": [
+                { "key": "cartId", "description": "The unique cart identifier" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

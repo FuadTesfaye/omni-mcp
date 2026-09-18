@@ -2,6 +2,8 @@ import ora from "ora";
 import chalk from "chalk";
 import { McpifyPipeline, AdapterRegistry } from "@omni-mcp/core";
 import { OpenApiAdapter } from "@omni-mcp/adapter-openapi";
+import { CliAdapter } from "@omni-mcp/adapter-cli";
+import { PostmanAdapter } from "@omni-mcp/adapter-postman";
 
 export async function inspectCommand(
   source: string,
@@ -11,6 +13,8 @@ export async function inspectCommand(
 
   const registry = new AdapterRegistry();
   registry.register(new OpenApiAdapter());
+  registry.register(new CliAdapter());
+  registry.register(new PostmanAdapter());
   const pipeline = new McpifyPipeline(registry);
 
   const spinner = ora("Inspecting...").start();

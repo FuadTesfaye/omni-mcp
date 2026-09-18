@@ -16,7 +16,9 @@
         "mcpify": "./src/index.ts",
       },
       "dependencies": {
+        "@omni-mcp/adapter-cli": "workspace:*",
         "@omni-mcp/adapter-openapi": "workspace:*",
+        "@omni-mcp/adapter-postman": "workspace:*",
         "@omni-mcp/core": "workspace:*",
         "@omni-mcp/mcp": "workspace:*",
         "chalk": "^5.4.1",
@@ -52,6 +54,19 @@
         "typescript": "^5.7.0",
       },
     },
+    "packages/adapter-cli": {
+      "name": "@omni-mcp/adapter-cli",
+      "version": "0.1.0",
+      "dependencies": {
+        "@omni-mcp/types": "workspace:*",
+      },
+      "devDependencies": {
+        "@omni-mcp/typescript-config": "workspace:*",
+        "@types/bun": "latest",
+        "@types/node": "^22.0.0",
+        "typescript": "^5.7.0",
+      },
+    },
     "packages/adapter-openapi": {
       "name": "@omni-mcp/adapter-openapi",
       "version": "0.1.0",
@@ -62,6 +77,19 @@
       "devDependencies": {
         "@omni-mcp/typescript-config": "workspace:*",
         "@types/bun": "latest",
+        "typescript": "^5.7.0",
+      },
+    },
+    "packages/adapter-postman": {
+      "name": "@omni-mcp/adapter-postman",
+      "version": "0.1.0",
+      "dependencies": {
+        "@omni-mcp/types": "workspace:*",
+      },
+      "devDependencies": {
+        "@omni-mcp/typescript-config": "workspace:*",
+        "@types/bun": "latest",
+        "@types/node": "^22.0.0",
         "typescript": "^5.7.0",
       },
     },
@@ -257,7 +285,11 @@
 
     "@nolyfill/is-core-module": ["@nolyfill/is-core-module@1.0.39", "", {}, "sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA=="],
 
+    "@omni-mcp/adapter-cli": ["@omni-mcp/adapter-cli@workspace:packages/adapter-cli"],
+
     "@omni-mcp/adapter-openapi": ["@omni-mcp/adapter-openapi@workspace:packages/adapter-openapi"],
+
+    "@omni-mcp/adapter-postman": ["@omni-mcp/adapter-postman@workspace:packages/adapter-postman"],
 
     "@omni-mcp/cli": ["@omni-mcp/cli@workspace:apps/cli"],
 

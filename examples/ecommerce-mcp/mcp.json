@@ -1,0 +1,205 @@
+{
+  "name": "E-Commerce Services API/Products",
+  "version": "0.1.0",
+  "source": "./examples/sample-postman.json",
+  "sourceType": "postman",
+  "stats": {
+    "discovered": 3,
+    "generated": 3,
+    "readTools": 1,
+    "mutationTools": 1,
+    "destructiveTools": 1,
+    "groups": [
+      "E-Commerce Services API/Products",
+      "E-Commerce Services API/Checkout"
+    ]
+  },
+  "tools": [
+    {
+      "id": "437a12bf-bebf-4d95-a0ed-1f7074b864f1",
+      "name": "get_products",
+      "title": "Get Products",
+      "description": "GET https://api.store.local/v1/products?category=electronics&limit=10",
+      "source": {
+        "type": "postman",
+        "identifier": "./examples/sample-postman.json",
+        "originalName": "Get Products"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Product category",
+            "default": "electronics"
+          },
+          "limit": {
+            "type": "string",
+            "description": "Page limit",
+            "default": "10"
+          }
+        }
+      },
+      "execution": {
+        "type": "http",
+        "config": {
+          "method": "GET",
+          "pathTemplate": "/v1/products",
+          "baseUrl": "https://api.store.local",
+          "parameters": [
+            {
+              "name": "category",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "headers": {}
+        }
+      },
+      "risk": {
+        "level": "low",
+        "actions": [
+          "read",
+          "get"
+        ]
+      },
+      "metadata": {
+        "tags": [
+          "E-Commerce Services API/Products"
+        ],
+        "confidence": 0.9,
+        "generated": true,
+        "group": "E-Commerce Services API/Products"
+      }
+    },
+    {
+      "id": "ef381e64-2794-48de-b6f6-ce4379aab9ab",
+      "name": "create_product",
+      "title": "Create Product",
+      "description": "POST https://api.store.local/v1/products",
+      "source": {
+        "type": "postman",
+        "identifier": "./examples/sample-postman.json",
+        "originalName": "Create Product"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Body parameter: title"
+          },
+          "price": {
+            "type": "number",
+            "description": "Body parameter: price"
+          },
+          "sku": {
+            "type": "string",
+            "description": "Body parameter: sku"
+          }
+        },
+        "required": [
+          "title",
+          "price",
+          "sku"
+        ]
+      },
+      "execution": {
+        "type": "http",
+        "config": {
+          "method": "POST",
+          "pathTemplate": "/v1/products",
+          "baseUrl": "https://api.store.local",
+          "parameters": [],
+          "requestBodyContentType": "application/json",
+          "headers": {}
+        }
+      },
+      "risk": {
+        "level": "medium",
+        "actions": [
+          "mutation",
+          "post"
+        ]
+      },
+      "metadata": {
+        "tags": [
+          "E-Commerce Services API/Products"
+        ],
+        "confidence": 0.9,
+        "generated": true,
+        "group": "E-Commerce Services API/Products"
+      }
+    },
+    {
+      "id": "87dff54c-6c29-4bcb-b48b-359a13e9cbe5",
+      "name": "delete_cart",
+      "title": "Delete Cart",
+      "description": "DELETE https://api.store.local/v1/cart/:cartId",
+      "source": {
+        "type": "postman",
+        "identifier": "./examples/sample-postman.json",
+        "originalName": "Delete Cart"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "type": "string",
+            "description": "The unique cart identifier"
+          }
+        },
+        "required": [
+          "cartId"
+        ]
+      },
+      "execution": {
+        "type": "http",
+        "config": {
+          "method": "DELETE",
+          "pathTemplate": "/v1/cart/:cartId",
+          "baseUrl": "https://api.store.local",
+          "parameters": [
+            {
+              "name": "cartId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "headers": {}
+        }
+      },
+      "risk": {
+        "level": "critical",
+        "actions": [
+          "destructive",
+          "delete"
+        ],
+        "requiresApproval": true
+      },
+      "metadata": {
+        "tags": [
+          "E-Commerce Services API/Checkout"
+        ],
+        "confidence": 0.9,
+        "generated": true,
+        "group": "E-Commerce Services API/Checkout"
+      }
+    }
+  ],
+  "generatedAt": "2026-09-18T19:12:54.263Z"
+}
